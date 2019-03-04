@@ -3,15 +3,13 @@ package fr.iocean.dta.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import lombok.Getter;
-import lombok.Setter;
-
 public class Employe {
 
 	public Employe() {
 	}
 
-	public Employe(Long identifiant, String prenom, String nom, String numeroSS, BigDecimal salaire,LocalDate dateEmbauche) {
+	public Employe(Long identifiant, String prenom, String nom, String numeroSS, BigDecimal salaire,
+			LocalDate dateEmbauche) {
 
 		this.identifiant = identifiant;
 		this.prenom = prenom;
@@ -21,26 +19,17 @@ public class Employe {
 		this.dateEmbauche = dateEmbauche;
 	}
 
-	
-	
 	private Long identifiant;
-	
 
 	private String prenom;
-	
 
 	private String nom;
-	
 
 	private String numeroSS;
-	
 
 	private BigDecimal salaire;
 
 	private LocalDate dateEmbauche;
-	
-	
-	
 
 	public Long getIdentifiant() {
 		return identifiant;
@@ -95,7 +84,5 @@ public class Employe {
 		return "Employe [identifiant=" + identifiant + ", prenom=" + prenom + ", nom=" + nom + ", numeroSS=" + numeroSS
 				+ ", salaire=" + salaire + ", dateEmbauche=" + dateEmbauche + "]";
 	}
-	
-	
-	
+
 }
