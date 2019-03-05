@@ -54,6 +54,12 @@ public class EmployeeStubService implements EmployeService {
 		
 	}
 
+	@Override
+	public void deleteAllEmployees() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 
 }

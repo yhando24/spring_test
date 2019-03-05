@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.iocean.dta.exception.EmployeeNotFoundException;
+import fr.iocean.dta.exception.ErrorUpdateException;
 import fr.iocean.dta.model.Employe;
 
 @Repository
@@ -71,16 +72,26 @@ public class EmployeeJdbcRepository extends AbstractJdbcRepository implements Em
 	}
 
 	@Override
-	public void updateAll(List<Employe> employes) {
+	public void updateAll(List<Employe> employes) throws ErrorUpdateException {
+
 		for (Employe employe : employes) {
-			java.sql.Date date = Date.valueOf(employe.getDateEmbauche());
+			int executer = 0;
+				java.sql.Date date = Date.valueOf(employe.getDateEmbauche());
+				System.out.println("update de :" + employe.getIdentifiant());
 
-			this.jdbcTemplate.update(
-					"update employee set firstname = ?, lastname = ?, hiredate = ?,  salary = ?, ssn = ? where id = ?",
-					"Prenom", "BAAAA", date, employe.getSalaire(), employe.getNumeroSS(), employe.getIdentifiant());
-
+				executer +=	this.jdbcTemplate.update(
+						"update employee set firstname = ?, lastname = ?, hiredate = ?,  salary = ?, ssn = ? where id = ?",
+						"Prenom", "nom", date, employe.getSalaire(), employe.getNumeroSS(), employe.getIdentifiant());
+				if(executer != 1) {
+					throw  new ErrorUpdateException("Erreur update");
+				}
+		
 		}
-
 	}
 
+	@Override
+	public void deleteAllEmployees() {
+		// TODO Auto-generated method stub
+		
+	}
 }

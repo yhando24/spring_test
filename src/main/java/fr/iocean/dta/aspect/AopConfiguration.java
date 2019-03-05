@@ -1,8 +1,6 @@
 package fr.iocean.dta.aspect;
 
-import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.LoggerFactory;
@@ -40,13 +38,13 @@ public class AopConfiguration {
 
 	}
 
-	@Around("execution(* fr.iocean.dta.service.*.*(..))")
-	public Object afficherMessageBeforeAllFunction(ProceedingJoinPoint joinPoint) throws Throwable {
-		System.out.println("AVANT CHAQUE METHODE : " + joinPoint.getSignature().getName());
-		Object returnVal = null;
-		returnVal = joinPoint.proceed();
-		System.out.println("Apres CHAQUE METHODE " + joinPoint.getSignature().getName());
-		return returnVal;
-	}
+//	@Around("execution(* fr.iocean.dta.service.*.*(..))")
+//	public Object afficherMessageBeforeAllFunction(ProceedingJoinPoint joinPoint) throws Throwable {
+//		System.out.println("AVANT CHAQUE METHODE : " + joinPoint.getSignature().getName());
+//		Object returnVal = null;
+//		returnVal = joinPoint.proceed();
+//		System.out.println("Apres CHAQUE METHODE " + joinPoint.getSignature().getName());
+//		return returnVal;
+//	}
 
 }

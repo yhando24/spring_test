@@ -9,37 +9,47 @@ import org.springframework.transaction.annotation.Transactional;
 import fr.iocean.dta.exception.EmployeeNotFoundException;
 import fr.iocean.dta.exception.ErrorUpdateException;
 import fr.iocean.dta.model.Employe;
+import fr.iocean.dta.repository.EmployeeJpaRepository;
 import fr.iocean.dta.repository.EmployeeRepository;
 
 @Service
-public class EmployeeJdbcService implements EmployeService {
+@Transactional(rollbackFor = EmployeeNotFoundException.class)
+public class EmployeeJpaService implements EmployeService {
 
 	@Autowired
-	private EmployeeRepository employeeJdbcRepository;
+	private EmployeeRepository employeeJpaRepository;
 
 	@Override
 	public void saveEmployee(Employe employe) {
-		employeeJdbcRepository.saveEmployee(employe);
+		employeeJpaRepository.saveEmployee(employe);
+		
 	}
 
 	@Override
 	public List<Employe> findAllEmployees() {
-		List<Employe> e = employeeJdbcRepository.findAllEmployes();
-		return e;
+	
+		return employeeJpaRepository.findAllEmployes();
 	}
 
-	@Override
+	@Override	
+	@Transactional(rollbackFor = EmployeeNotFoundException.class)
 	public Employe findBySsn(String ssn) {
-		try {
-			return employeeJdbcRepository.findBySsn(ssn);
-		} catch (EmployeeNotFoundException e) {
+
+			try {
+				return employeeJpaRepository.findBySsn(ssn);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			return null;
-		}
+
+
 	}
 
 	@Override
 	public void updateEmployee(Employe employe) {
-		employeeJdbcRepository.updateEmployee(employe);
+		employeeJpaRepository.updateEmployee(employe);
+		
 	}
 
 	@Override
@@ -50,25 +60,19 @@ public class EmployeeJdbcService implements EmployeService {
 
 	@Override
 	public void deleteEmploye(int id) {
-		employeeJdbcRepository.deleteEmploye(id);
-
+		employeeJpaRepository.deleteEmploye(id);
+		
 	}
 
 	@Override
-	@Transactional(rollbackFor = ErrorUpdateException.class)
 	public void updateAll(List<Employe> employes) {
-		try {
-			employeeJdbcRepository.updateAll(employes);
-		}catch (RuntimeException e) {
-			// TODO: handle exception
-		}
-			
-	}
-
-	@Override
-	public void deleteAllEmployees() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	@Override
+	public void deleteAllEmployees() {
+		employeeJpaRepository.deleteAllEmployees();
+		
+	}
 }

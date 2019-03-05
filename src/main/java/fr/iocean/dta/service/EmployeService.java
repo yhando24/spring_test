@@ -2,7 +2,6 @@ package fr.iocean.dta.service;
 
 import java.util.List;
 
-import fr.iocean.dta.exception.ErrorUpdateException;
 import fr.iocean.dta.model.Employe;
 
 public interface EmployeService {
@@ -19,5 +18,7 @@ public interface EmployeService {
 	void deleteEmploye(int id);
 	
 	void updateAll(List <Employe> employes);
+	
+	void deleteAllEmployees();
 
 }
