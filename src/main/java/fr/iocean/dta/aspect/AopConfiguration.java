@@ -4,11 +4,14 @@ import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.stereotype.Component;
 
 import ch.qos.logback.classic.Level;
 import fr.iocean.dta.exception.EmployeeNotFoundException;
 import fr.iocean.dta.main.App;
+import fr.iocean.dta.service.EmployeService;
 
 @Aspect
 @Component
@@ -25,6 +28,9 @@ public class AopConfiguration {
 		loggerParent.warn("Nom de la methode : " + jp.getSignature().getName(), App.class.getSimpleName());
 
 	}
+	
+
+	
 
 //	tp 21
 	@AfterThrowing(pointcut = "execution(* *(..) throws fr.iocean.dta.exception.EmployeeNotFoundException)", throwing = "ex")

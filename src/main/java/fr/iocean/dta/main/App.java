@@ -51,11 +51,13 @@ public class App {
 //		employeeJdbcService.deleteEmploye(3);
 
 //		Employe e2 = employeeJdbcService.findBySsn("5");
-		
+
 		EmployeService employeeJpaService =  (EmployeService) context.getBean("employeeJpaService");
 //		employeeJpaService.saveEmployee(e1);
 //		
 		Employe e2 = employeeJpaService.findBySsn("5");
+		e2.setNom("plop");
+		employeeJpaService.updateEmployee(e2);
 		System.out.println("YO : " + e2);
 		context.close();
 	}

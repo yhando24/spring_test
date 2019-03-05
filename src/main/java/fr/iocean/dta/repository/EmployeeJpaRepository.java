@@ -38,8 +38,7 @@ return query.getSingleResult();
 
 	@Override
 	public void updateEmployee(Employe employe) {
-		this.em.persist(employe);
-		
+		this.em.merge(employe);
 	}
 
 	@Override
